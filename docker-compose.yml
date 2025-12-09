@@ -30,7 +30,14 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - ./data:/data  # Mount for file access from workers
+      - ./data:/data
+      - shared_config:/config
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   worker:
     build:
@@ -44,7 +51,8 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - ./data:/data  # Mount for file access
+      - ./data:/data
 
 volumes:
   postgres_data:
+  shared_config:

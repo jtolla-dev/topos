@@ -1,0 +1,95 @@
+NON-DISCLOSURE AGREEMENT
+
+This Non-Disclosure Agreement ("Agreement") is made effective as of February 1, 2024 ("Effective Date"), by and between:
+
+ACME Corporation ("Disclosing Party")
+123 Main Street
+San Francisco, CA 94102
+
+and
+
+CloudTech Solutions LLC ("Receiving Party")
+789 Cloud Avenue
+Seattle, WA 98101
+
+RECITALS
+
+The parties wish to explore a potential business relationship concerning cloud infrastructure services. In connection with this opportunity, the Disclosing Party may disclose certain confidential and proprietary information to the Receiving Party.
+
+AGREEMENT
+
+1. DEFINITION OF CONFIDENTIAL INFORMATION
+
+"Confidential Information" means any and all information or data disclosed by the Disclosing Party that:
+(a) Is marked as "Confidential," "Proprietary," or with a similar designation;
+(b) Is identified as confidential at the time of disclosure; or
+(c) Should reasonably be understood to be confidential given the nature of the information and circumstances of disclosure.
+
+Confidential Information includes, but is not limited to:
+- Technical data and specifications
+- Business plans and strategies
+- Customer lists and information
+- Financial information
+- Product roadmaps
+- Employee information (SSN: XXX-XX-XXXX format protected)
+- Source code and algorithms
+
+2. OBLIGATIONS OF RECEIVING PARTY
+
+The Receiving Party agrees to:
+
+2.1 Hold all Confidential Information in strict confidence;
+
+2.2 Not disclose Confidential Information to any third parties without prior written consent;
+
+2.3 Use Confidential Information solely for evaluating the potential business relationship;
+
+2.4 Limit access to Confidential Information to employees and contractors with a need to know;
+
+2.5 Protect Confidential Information using the same degree of care used to protect its own confidential information, but in no event less than reasonable care.
+
+3. EXCLUSIONS
+
+Confidential Information does not include information that:
+(a) Was publicly available at the time of disclosure;
+(b) Becomes publicly available through no fault of the Receiving Party;
+(c) Was rightfully in the Receiving Party's possession prior to disclosure;
+(d) Is independently developed by the Receiving Party without use of Confidential Information;
+(e) Is rightfully obtained from a third party without restriction.
+
+4. TERM
+
+4.1 This Agreement shall remain in effect for a period of two (2) years from the Effective Date.
+
+4.2 The obligations of confidentiality shall survive termination and continue for a period of five (5) years thereafter.
+
+5. RETURN OF MATERIALS
+
+Upon termination or request by the Disclosing Party, the Receiving Party shall promptly:
+(a) Return all Confidential Information and copies thereof; or
+(b) Destroy all Confidential Information and certify such destruction in writing.
+
+6. NO LICENSE
+
+Nothing in this Agreement grants any license or right in or to the Confidential Information except as expressly set forth herein.
+
+7. REMEDIES
+
+The Receiving Party acknowledges that unauthorized disclosure may cause irreparable harm. The Disclosing Party shall be entitled to seek injunctive relief in addition to any other remedies available at law.
+
+8. GOVERNING LAW
+
+This Agreement shall be governed by the laws of the State of California.
+
+9. ENTIRE AGREEMENT
+
+This Agreement constitutes the entire understanding between the parties concerning the subject matter hereof.
+
+IN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.
+
+ACME CORPORATION                    CLOUDTECH SOLUTIONS LLC
+
+By: _________________________       By: _________________________
+Name: Michael Chen                  Name: Emily Watson
+Title: General Counsel              Title: CEO
+Date: February 1, 2024              Date: February 1, 2024

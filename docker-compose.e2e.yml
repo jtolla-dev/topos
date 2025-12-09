@@ -1,0 +1,72 @@
+# End-to-End Development Environment
+#
+# This extends the base docker-compose.yml with:
+# - SMB server with sample documents
+# - Init service to bootstrap tenant/estate/share
+# - Strata agent for scanning documents
+#
+# Usage:
+#   docker-compose -f docker-compose.yml -f docker-compose.e2e.yml up --build
+#
+# Or use the shorthand:
+#   docker-compose --profile e2e up --build
+
+version: "3.8"
+
+services:
+  # Override worker to mount sample documents
+  worker:
+    volumes:
+      - ./data:/data
+      - ./dev/samples:/mnt/documents:ro
+
+  # SMB server with sample documents (for testing SMB connectivity)
+  samba:
+    image: dperson/samba
+    ports:
+      - "445:445"
+    volumes:
+      - ./dev/samba/smb.conf:/etc/samba/smb.conf:ro
+      - ./dev/samples:/shares/documents:ro
+    command: ["-p", "-n", "-s", "documents;/shares/documents;yes;no;yes;all"]
+    profiles: ["e2e"]
+
+  # Init service to bootstrap tenant/estate/share
+  init:
+    build:
+      context: ./dev
+      dockerfile: Dockerfile.init
+    environment:
+      API_BASE_URL: http://api:8000
+    depends_on:
+      api:
+        condition: service_healthy
+    volumes:
+      - shared_config:/config
+    profiles: ["e2e"]
+
+  # Strata agent for scanning documents
+  agent:
+    build:
+      context: ./agent
+      dockerfile: Dockerfile
+    environment:
+      STRATA_API_BASE_URL: http://api:8000
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    volumes:
+      - ./dev/agent-config.yaml:/config/config.yaml:ro
+      - shared_config:/config
+      - ./dev/samples:/mnt/documents:ro
+    command: >
+      sh -c '
+        if [ -f /config/api-key ]; then
+          export STRATA_API_KEY=$$(cat /config/api-key);
+        fi;
+        strata-agent --config /config/config.yaml
+      '
+    profiles: ["e2e"]
+
+volumes:
+  shared_config:

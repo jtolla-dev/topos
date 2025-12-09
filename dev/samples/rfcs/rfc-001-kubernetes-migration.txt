@@ -1,0 +1,212 @@
+# RFC-001: Kubernetes Migration
+
+**Title:** Migration from EC2 to Kubernetes
+**Authors:** Alice Chen, Bob Martinez
+**Status:** Accepted
+**Created:** 2024-01-10
+**Last Updated:** 2024-02-15
+
+## Summary
+
+This RFC proposes migrating our production workloads from standalone EC2 instances to a managed Kubernetes cluster (EKS). This will improve deployment velocity, resource utilization, and operational efficiency.
+
+## Problem Statement
+
+Our current EC2-based infrastructure has several limitations:
+
+1. **Manual Scaling**: Auto-scaling groups require manual configuration per service
+2. **Deployment Complexity**: Deployments require custom scripts and manual coordination
+3. **Resource Inefficiency**: Each service runs on dedicated instances, leading to underutilization
+4. **Inconsistent Environments**: Dev, staging, and production environments drift over time
+5. **Limited Self-Healing**: Failed instances require manual intervention
+
+Current deployment frequency: 2-3 times per week
+Average deployment time: 45 minutes
+Rollback time: 30+ minutes
+
+## Proposed Solution
+
+### Architecture Overview
+
+```
+                    ┌─────────────────────────────────────────┐
+                    │              AWS EKS Cluster            │
+                    │                                         │
+┌──────────┐        │  ┌─────────────────────────────────┐   │
+│   ALB    │────────┼──│     Ingress Controller          │   │
+└──────────┘        │  └─────────────────────────────────┘   │
+                    │                 │                       │
+                    │    ┌────────────┼────────────┐         │
+                    │    ▼            ▼            ▼         │
+                    │ ┌──────┐   ┌──────┐    ┌──────┐       │
+                    │ │ API  │   │Worker│    │ Web  │       │
+                    │ │Pods  │   │Pods  │    │Pods  │       │
+                    │ └──────┘   └──────┘    └──────┘       │
+                    │                                         │
+                    │  ┌─────────────────────────────────┐   │
+                    │  │   Shared Services (Monitoring,   │   │
+                    │  │   Logging, Service Mesh)         │   │
+                    │  └─────────────────────────────────┘   │
+                    └─────────────────────────────────────────┘
+```
+
+### Key Components
+
+1. **Amazon EKS**: Managed Kubernetes control plane
+2. **Karpenter**: Automatic node provisioning and scaling
+3. **ArgoCD**: GitOps-based continuous deployment
+4. **Istio**: Service mesh for traffic management and observability
+5. **External Secrets Operator**: Secrets management with AWS Secrets Manager
+
+### Migration Strategy
+
+**Phase 1: Foundation (Weeks 1-4)**
+- Set up EKS cluster with Terraform
+- Configure networking (VPC, subnets, security groups)
+- Deploy core infrastructure (ingress, cert-manager, monitoring)
+- Establish CI/CD pipelines
+
+**Phase 2: Non-Critical Services (Weeks 5-8)**
+- Migrate internal tools and admin services
+- Validate deployment processes
+- Train operations team
+
+**Phase 3: Production Services (Weeks 9-14)**
+- Migrate API services with canary deployments
+- Migrate worker services
+- Migrate web frontend
+- Parallel running with traffic shifting
+
+**Phase 4: Decommission (Weeks 15-16)**
+- Remove EC2 instances
+- Clean up legacy infrastructure
+- Documentation and handoff
+
+## Affected Systems
+
+- API Gateway (api.acme-corp.example.com)
+- Worker Services (background jobs, queue processors)
+- Web Application (app.acme-corp.example.com)
+- Internal Tools (admin, monitoring dashboards)
+- CI/CD Pipelines (GitHub Actions)
+
+## Alternatives Considered
+
+### Alternative 1: AWS ECS
+
+**Pros:**
+- Simpler than Kubernetes
+- Deep AWS integration
+- Lower learning curve
+
+**Cons:**
+- Vendor lock-in
+- Less ecosystem support
+- Limited to AWS features
+
+**Decision:** Rejected due to vendor lock-in concerns and desire for portability.
+
+### Alternative 2: Stay on EC2 with Improved Tooling
+
+**Pros:**
+- No migration risk
+- Team familiarity
+- Lower upfront cost
+
+**Cons:**
+- Doesn't address fundamental scaling issues
+- Technical debt continues to grow
+- Falling behind industry practices
+
+**Decision:** Rejected as it doesn't solve our core problems.
+
+### Alternative 3: Serverless (Lambda/Fargate)
+
+**Pros:**
+- No infrastructure management
+- Pay-per-use pricing
+- Automatic scaling
+
+**Cons:**
+- Cold start latency
+- Architectural changes required
+- Cost unpredictability at scale
+
+**Decision:** Rejected due to latency requirements and cost concerns.
+
+## Resource Requirements
+
+### Team
+- 2 Platform Engineers (full-time, 16 weeks)
+- 1 DevOps Engineer (full-time, 16 weeks)
+- Application teams (part-time for containerization)
+
+### Infrastructure Cost Estimate
+
+| Component | Monthly Cost |
+|-----------|-------------|
+| EKS Control Plane | $144 |
+| EC2 Nodes (m5.xlarge x 6) | $1,040 |
+| Load Balancers | $200 |
+| Data Transfer | $500 |
+| **Total** | **$1,884** |
+
+Current EC2 cost: $2,500/month
+**Projected savings: $616/month (25%)**
+
+### Timeline
+
+- Start Date: March 1, 2024
+- Target Completion: June 15, 2024
+- Buffer: 2 weeks
+
+## Risks and Mitigations
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|------------|
+| Extended downtime during migration | Low | High | Canary deployments, rollback procedures |
+| Team skill gaps | Medium | Medium | Training, documentation, gradual rollout |
+| Cost overrun | Low | Low | Monitoring, right-sizing, spot instances |
+| Performance regression | Medium | Medium | Load testing, gradual traffic shift |
+
+## Success Metrics
+
+1. **Deployment Frequency**: Increase from 2-3/week to daily
+2. **Deployment Time**: Reduce from 45 min to <10 min
+3. **Rollback Time**: Reduce from 30 min to <5 min
+4. **Infrastructure Cost**: Reduce by 20%+
+5. **Resource Utilization**: Increase from 30% to 70%+
+
+## Security Considerations
+
+- Network policies for pod-to-pod communication
+- RBAC for cluster access control
+- Pod security policies/standards
+- Secrets encryption at rest
+- Audit logging enabled
+- Regular vulnerability scanning of container images
+
+## Open Questions
+
+1. ~~Should we use managed node groups or self-managed?~~ **Resolved: Karpenter with self-managed nodes**
+2. ~~Service mesh: Istio vs Linkerd?~~ **Resolved: Istio for feature completeness**
+3. Multi-cluster strategy for DR?
+
+## Decision
+
+**Status: ACCEPTED**
+
+Approved by:
+- VP Engineering: Sarah Johnson (2024-02-10)
+- CTO: David Kim (2024-02-12)
+- Director of Operations: Mike Thompson (2024-02-15)
+
+## References
+
+- [EKS Best Practices Guide](https://aws.github.io/aws-eks-best-practices/)
+- [Kubernetes Documentation](https://kubernetes.io/docs/)
+- Internal: Migration Runbook (Confluence)
+- Internal: Cost Analysis Spreadsheet (Google Sheets)
+
+---
+Document Classification: INTERNAL

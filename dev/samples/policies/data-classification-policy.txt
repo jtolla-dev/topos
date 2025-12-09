@@ -1,0 +1,163 @@
+ACME CORPORATION
+DATA CLASSIFICATION AND HANDLING POLICY
+
+Policy Name: Data Classification and Handling Policy
+Policy Number: SEC-001
+Policy Type: Information Security
+Version: 2.1
+Effective Date: January 1, 2024
+Next Review Date: January 1, 2025
+Policy Owner: Chief Information Security Officer (CISO)
+Approved By: Executive Leadership Team
+
+1. PURPOSE
+
+This policy establishes a framework for classifying and handling data based on its sensitivity and criticality to ACME Corporation. Proper data classification ensures that information assets receive an appropriate level of protection.
+
+2. SCOPE
+
+This policy applies to:
+- All employees, contractors, and third parties with access to ACME data
+- All data created, collected, stored, or processed by ACME Corporation
+- All systems and applications that handle ACME data
+- All locations where ACME data is stored or processed
+
+3. DATA CLASSIFICATION LEVELS
+
+3.1 PUBLIC
+- Information approved for public release
+- No restrictions on distribution
+- Examples: Marketing materials, press releases, public website content
+
+3.2 INTERNAL
+- Information intended for internal use only
+- Should not be shared externally without authorization
+- Examples: Internal announcements, organizational charts, general policies
+
+3.3 CONFIDENTIAL
+- Sensitive business information requiring protection
+- Disclosure could harm business interests
+- Examples: Financial reports, business strategies, customer lists, contracts
+
+3.4 RESTRICTED
+- Highly sensitive information requiring maximum protection
+- Disclosure could cause significant harm
+- Examples:
+  * Personal Identifiable Information (PII): SSN, credit card numbers
+  * Protected Health Information (PHI)
+  * Trade secrets and intellectual property
+  * Security credentials and API keys
+  * Employee salary and performance data
+
+4. DATA HANDLING REQUIREMENTS
+
+4.1 PUBLIC DATA
+- Storage: No special requirements
+- Transmission: No encryption required
+- Disposal: Standard disposal methods
+
+4.2 INTERNAL DATA
+- Storage: Access controls required
+- Transmission: Internal networks only; encryption for external transmission
+- Disposal: Delete or shred when no longer needed
+
+4.3 CONFIDENTIAL DATA
+- Storage: Encrypted at rest; access logging required
+- Transmission: Encryption required (TLS 1.2+)
+- Disposal: Secure deletion with verification
+- Retention: Per retention schedule, minimum 7 years for financial data
+
+4.4 RESTRICTED DATA
+- Storage: Encrypted at rest (AES-256); strict access controls; dedicated systems
+- Transmission: End-to-end encryption required
+- Disposal: Cryptographic erasure or physical destruction
+- Access: Need-to-know basis; manager approval required
+- Monitoring: Real-time access monitoring and alerts
+
+5. LABELING REQUIREMENTS
+
+5.1 All documents containing Confidential or Restricted data must be clearly labeled.
+
+5.2 Electronic files should include classification in:
+- File name (e.g., "Q4-Financial-Report-CONFIDENTIAL.xlsx")
+- Document header/footer
+- Metadata where supported
+
+5.3 Physical documents must have classification stamps on each page.
+
+6. ACCESS CONTROL
+
+6.1 Access to classified data must follow the principle of least privilege.
+
+6.2 Access requests must be:
+- Submitted through the IT Service Portal
+- Approved by data owner
+- Reviewed quarterly
+
+6.3 Access must be revoked:
+- Upon role change
+- Upon termination
+- When no longer required
+
+7. THIRD-PARTY SHARING
+
+7.1 Confidential and Restricted data may only be shared with third parties under:
+- Signed NDA or equivalent contractual protection
+- Data owner approval
+- Legal review for Restricted data
+
+7.2 Third parties must demonstrate adequate security controls.
+
+8. INCIDENT REPORTING
+
+8.1 Any suspected data breach or policy violation must be reported immediately to:
+- Security Operations Center: security@acme-corp.example.com
+- Security Hotline: (555) 911-SECU
+
+8.2 Do not attempt to investigate or contain incidents independently.
+
+9. COMPLIANCE AND ENFORCEMENT
+
+9.1 Compliance with this policy is mandatory.
+
+9.2 Violations may result in:
+- Disciplinary action up to and including termination
+- Civil or criminal penalties for willful violations
+- Liability for damages resulting from unauthorized disclosure
+
+9.3 Regular audits will be conducted to verify compliance.
+
+10. TRAINING REQUIREMENTS
+
+10.1 All employees must complete data classification training:
+- Within 30 days of hire
+- Annually thereafter
+
+10.2 Additional training required for personnel handling Restricted data.
+
+11. EXCEPTIONS
+
+11.1 Exceptions to this policy must be:
+- Submitted in writing to the CISO
+- Approved by the CISO and data owner
+- Time-limited and documented
+- Reviewed quarterly
+
+12. RELATED POLICIES
+
+- Acceptable Use Policy (SEC-002)
+- Access Control Policy (SEC-003)
+- Encryption Policy (SEC-004)
+- Data Retention Policy (SEC-005)
+- Incident Response Policy (SEC-006)
+
+13. REVISION HISTORY
+
+| Version | Date       | Author        | Description                    |
+|---------|------------|---------------|--------------------------------|
+| 1.0     | 2022-01-01 | J. Smith      | Initial release                |
+| 2.0     | 2023-01-01 | M. Johnson    | Added Restricted category      |
+| 2.1     | 2024-01-01 | S. Williams   | Updated handling requirements  |
+
+---
+Document Classification: INTERNAL

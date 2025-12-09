@@ -1,0 +1,235 @@
+# RFC-002: API Versioning Strategy
+
+**Title:** Implementing API Versioning for Public APIs
+**Authors:** Carlos Rodriguez, Diana Lee
+**Status:** Proposed
+**Created:** 2024-02-20
+**Last Updated:** 2024-02-25
+
+## Summary
+
+This RFC proposes implementing a comprehensive API versioning strategy for our public-facing APIs. As we expand our API surface and onboard more third-party integrations, we need a clear strategy for evolving APIs without breaking existing clients.
+
+## Problem Statement
+
+Our current API (api.acme-corp.example.com/v1) has grown organically without a clear versioning strategy. We're facing several challenges:
+
+1. **Breaking Changes**: Recent updates broke 3 client integrations
+2. **No Deprecation Process**: Clients have no warning before changes
+3. **Inconsistent Responses**: Different endpoints return different formats
+4. **Documentation Drift**: API docs don't match actual behavior
+5. **Client Confusion**: Unclear which version to use for new integrations
+
+**Impact:**
+- 15 support tickets in Q1 related to API changes
+- 2 enterprise customers threatened to churn
+- Engineering time spent on hotfixes and client support
+
+## Proposed Solution
+
+### Versioning Scheme
+
+Adopt **URL path versioning** with semantic version-like major versions:
+
+```
+https://api.acme-corp.example.com/v1/...
+https://api.acme-corp.example.com/v2/...
+```
+
+**Why URL path versioning:**
+- Explicit and visible
+- Easy to route at load balancer level
+- Clear in documentation and examples
+- Industry standard (Stripe, GitHub, Twilio)
+
+### Version Lifecycle
+
+```
+┌──────────┐    ┌──────────┐    ┌────────────┐    ┌──────────┐
+│  Alpha   │───▶│  Beta    │───▶│  Stable    │───▶│Deprecated│───▶ Sunset
+│ (v2-alpha)   │ (v2-beta) │    │   (v2)     │    │  (v2)    │
+└──────────┘    └──────────┘    └────────────┘    └──────────┘
+   3 months       3 months      Min 24 months      12 months
+```
+
+**Stage Definitions:**
+
+| Stage | Stability | Breaking Changes | SLA |
+|-------|-----------|-----------------|-----|
+| Alpha | Experimental | Any time | None |
+| Beta | Testing | With notice | Best effort |
+| Stable | Production | Major version only | 99.9% |
+| Deprecated | Legacy | None | 99.9% |
+
+### API Design Principles
+
+1. **Additive Changes Only** (within a major version)
+   - New optional fields: OK
+   - New endpoints: OK
+   - Removing fields: NOT OK (requires major version)
+   - Changing field types: NOT OK
+
+2. **Response Envelope**
+   ```json
+   {
+     "data": { ... },
+     "meta": {
+       "api_version": "v2",
+       "request_id": "req_abc123",
+       "deprecated_fields": []
+     }
+   }
+   ```
+
+3. **Deprecation Headers**
+   ```
+   Deprecation: true
+   Sunset: Sat, 01 Mar 2025 00:00:00 GMT
+   Link: <https://api.acme-corp.example.com/v3/users>; rel="successor-version"
+   ```
+
+4. **Request Validation**
+   - Strict mode: Reject unknown fields
+   - Lenient mode (default): Ignore unknown fields
+
+### Migration Support
+
+1. **Version Coexistence**
+   - Multiple versions run simultaneously
+   - Shared database with version-specific adapters
+   - Feature flags for gradual rollout
+
+2. **Client Libraries**
+   - Maintain libraries for N and N-1 versions
+   - Auto-generated from OpenAPI specs
+   - Migration guides for each major version
+
+3. **Developer Portal**
+   - Version selector in documentation
+   - Interactive migration assistant
+   - Changelog with breaking change highlights
+
+## Affected Systems
+
+- API Gateway
+- Authentication Service
+- All public API endpoints
+- Client SDKs (Python, JavaScript, Ruby, Go)
+- Developer Portal / Documentation
+- Monitoring and Analytics
+
+## Alternatives Considered
+
+### Alternative 1: Header-Based Versioning
+
+```
+Accept: application/vnd.acme.v2+json
+```
+
+**Pros:**
+- Clean URLs
+- More RESTful
+
+**Cons:**
+- Hidden versioning
+- Harder to debug
+- Not cacheable by version
+
+**Decision:** Rejected for lack of visibility
+
+### Alternative 2: Query Parameter Versioning
+
+```
+/users?api_version=2
+```
+
+**Pros:**
+- Easy to implement
+- Visible
+
+**Cons:**
+- Can be omitted accidentally
+- Pollutes query string
+- Caching complexity
+
+**Decision:** Rejected for reliability concerns
+
+### Alternative 3: No Versioning (Evolvable APIs)
+
+**Pros:**
+- Simpler architecture
+- No version maintenance
+
+**Cons:**
+- Requires all clients to be flexible
+- Hard to make breaking changes
+- Not suitable for public APIs
+
+**Decision:** Rejected as impractical for enterprise clients
+
+## Implementation Plan
+
+### Phase 1: Foundation (Weeks 1-4)
+- [ ] Define OpenAPI spec standards
+- [ ] Implement version routing in API Gateway
+- [ ] Create version adapter framework
+- [ ] Set up version-specific monitoring
+
+### Phase 2: v2 Development (Weeks 5-10)
+- [ ] Design v2 API based on lessons learned
+- [ ] Implement v2 endpoints
+- [ ] Create migration guide
+- [ ] Update client libraries
+
+### Phase 3: Rollout (Weeks 11-14)
+- [ ] Beta release to select partners
+- [ ] Gather feedback and iterate
+- [ ] General availability announcement
+- [ ] Deprecation notice for v1
+
+### Phase 4: v1 Sunset (Months 12-24)
+- [ ] Proactive client migration support
+- [ ] Increasing deprecation warnings
+- [ ] Final sunset and removal
+
+## Resource Requirements
+
+- 1 API Platform Engineer (full-time, 14 weeks)
+- 1 Technical Writer (part-time, documentation)
+- Developer Advocate (client migration support)
+
+## Success Metrics
+
+1. **API Stability**: Zero unplanned breaking changes
+2. **Client Migration**: 80% of clients on v2 within 6 months
+3. **Support Reduction**: 50% reduction in API-related tickets
+4. **Documentation Accuracy**: 100% alignment with behavior
+5. **Developer Satisfaction**: NPS > 50 for API experience
+
+## Security Considerations
+
+- Version-specific rate limiting
+- Authentication compatible across versions
+- Audit logging includes version information
+- Security patches applied to all supported versions
+
+## Open Questions
+
+1. How long should we support deprecated versions?
+   - **Proposed:** Minimum 12 months after deprecation notice
+
+2. Should we charge differently for legacy version support?
+   - **Needs discussion**
+
+3. How do we handle emergency security fixes that require breaking changes?
+   - **Proposed:** Exception process with 30-day notice minimum
+
+## References
+
+- [Stripe API Versioning](https://stripe.com/docs/api/versioning)
+- [GitHub API Versioning](https://docs.github.com/en/rest/overview/api-versions)
+- [Microsoft REST API Guidelines](https://github.com/microsoft/api-guidelines)
+- Internal: API Design Standards (Confluence)
+
+---
+Document Classification: INTERNAL

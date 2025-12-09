@@ -1,0 +1,107 @@
+MASTER SERVICE AGREEMENT
+
+This Master Service Agreement ("Agreement") is entered into as of January 15, 2024 ("Effective Date") by and between:
+
+ACME Corporation, a Delaware corporation with offices at 123 Main Street, San Francisco, CA 94102 ("Client")
+
+and
+
+TechServices Inc., a California corporation with offices at 456 Innovation Way, Palo Alto, CA 94301 ("Provider")
+
+WHEREAS, Client desires to engage Provider to provide certain professional services; and
+
+WHEREAS, Provider desires to provide such services to Client on the terms and conditions set forth herein;
+
+NOW, THEREFORE, in consideration of the mutual covenants and agreements hereinafter set forth, the parties agree as follows:
+
+1. SERVICES
+
+1.1 Scope of Services. Provider shall provide the services described in one or more Statements of Work ("SOW") executed by both parties and incorporated herein by reference.
+
+1.2 Performance Standards. Provider shall perform all Services in a professional and workmanlike manner, consistent with industry standards.
+
+2. TERM AND TERMINATION
+
+2.1 Term. This Agreement shall commence on the Effective Date and continue for a period of twenty-four (24) months, unless earlier terminated in accordance with this Agreement.
+
+2.2 Renewal. This Agreement shall automatically renew for successive one (1) year periods unless either party provides written notice of non-renewal at least sixty (60) days prior to the end of the then-current term.
+
+2.3 Termination for Convenience. Either party may terminate this Agreement for any reason upon ninety (90) days prior written notice to the other party.
+
+2.4 Termination for Cause. Either party may terminate this Agreement immediately upon written notice if the other party materially breaches this Agreement and fails to cure such breach within thirty (30) days after receiving written notice thereof.
+
+3. COMPENSATION AND PAYMENT
+
+3.1 Fees. Client shall pay Provider the fees set forth in each applicable SOW.
+
+3.2 Payment Terms. Unless otherwise specified in an SOW, all invoices shall be due and payable within thirty (30) days of the invoice date ("Net 30").
+
+3.3 Late Payments. Any amounts not paid when due shall bear interest at the rate of one and one-half percent (1.5%) per month, or the maximum rate permitted by law, whichever is less.
+
+4. CONFIDENTIALITY
+
+4.1 Definition. "Confidential Information" means any non-public information disclosed by either party to the other, whether orally or in writing, that is designated as confidential or that reasonably should be understood to be confidential.
+
+4.2 Obligations. Each party agrees to: (a) hold the other party's Confidential Information in strict confidence; (b) not disclose such information to any third party without prior written consent; and (c) use such information only for purposes of this Agreement.
+
+5. INTELLECTUAL PROPERTY
+
+5.1 Client Materials. Client shall retain all right, title, and interest in and to any materials provided by Client to Provider.
+
+5.2 Deliverables. Upon full payment, Client shall own all deliverables created by Provider specifically for Client under this Agreement.
+
+5.3 Provider Tools. Provider shall retain all right, title, and interest in Provider's pre-existing tools, methodologies, and know-how.
+
+6. SERVICE LEVEL AGREEMENT
+
+6.1 Availability. Provider shall maintain 99.9% availability for hosted services, measured monthly.
+
+6.2 Support Response Times:
+    - Critical Issues: Response within 1 hour, resolution within 4 hours
+    - High Priority: Response within 4 hours, resolution within 24 hours
+    - Normal Priority: Response within 8 hours, resolution within 72 hours
+
+6.3 Service Credits. If Provider fails to meet the availability commitment, Client shall receive service credits equal to 10% of the monthly fee for each hour of downtime below the commitment.
+
+7. LIMITATION OF LIABILITY
+
+7.1 IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.
+
+7.2 EXCEPT FOR BREACHES OF CONFIDENTIALITY OR INTELLECTUAL PROPERTY RIGHTS, EACH PARTY'S TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNTS PAID OR PAYABLE BY CLIENT IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.
+
+8. GOVERNING LAW
+
+8.1 This Agreement shall be governed by and construed in accordance with the laws of the State of California, without regard to its conflicts of law provisions.
+
+8.2 Any disputes arising under this Agreement shall be resolved in the state or federal courts located in San Francisco County, California.
+
+9. GENERAL PROVISIONS
+
+9.1 Entire Agreement. This Agreement, together with all SOWs, constitutes the entire agreement between the parties.
+
+9.2 Amendments. This Agreement may only be amended by a written instrument signed by both parties.
+
+9.3 Assignment. Neither party may assign this Agreement without the prior written consent of the other party.
+
+9.4 Notices. All notices shall be in writing and delivered to the addresses set forth above.
+
+IN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.
+
+ACME CORPORATION                    TECHSERVICES INC.
+
+By: _________________________       By: _________________________
+Name: John Smith                    Name: Jane Doe
+Title: Chief Operating Officer      Title: VP of Sales
+Date: January 15, 2024              Date: January 15, 2024
+
+---
+
+Contact Information:
+- ACME Legal: legal@acme-corp.example.com, (555) 123-4567
+- Provider Contact: contracts@techservices.example.com
+- Account Manager: Sarah Johnson, sarah.johnson@techservices.example.com
+
+Payment Details:
+- Bank: First National Bank
+- Account: 1234567890
+- Routing: 987654321

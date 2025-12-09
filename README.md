@@ -82,7 +82,8 @@ Strata is a storage-native semantic layer that sits beside existing file infrast
 strata/
 ├── README.md                    # This file
 ├── CLAUDE.md                    # Claude Code guidance
-├── docker-compose.yml           # Docker services (db, api, worker)
+├── docker-compose.yml           # Core Docker services (db, api, worker)
+├── docker-compose.e2e.yml       # End-to-end dev environment (adds agent, samba)
 │
 ├── backend/                     # Control plane (FastAPI)
 │   ├── pyproject.toml           # Python dependencies
@@ -122,12 +123,24 @@ strata/
 │
 ├── agent/                       # SMB connector agent
 │   ├── pyproject.toml           # Python dependencies
+│   ├── Dockerfile               # Agent container image
 │   ├── config.example.yaml      # Example configuration
 │   └── agent/
 │       ├── config.py            # YAML config loading
 │       ├── scanner.py           # File system scanner
 │       ├── client.py            # Strata API client
 │       └── main.py              # CLI entrypoint
+│
+├── dev/                         # Development environment
+│   ├── Dockerfile.init          # Init container for bootstrapping
+│   ├── init-dev.py              # Bootstrap tenant/estate/share
+│   ├── agent-config.yaml        # Agent config for Docker env
+│   ├── samba/
+│   │   └── smb.conf             # Samba configuration
+│   └── samples/                 # Sample documents
+│       ├── contracts/           # Sample contracts (MSA, NDA)
+│       ├── policies/            # Sample policies (AUP, data classification)
+│       └── rfcs/                # Sample RFCs (K8s migration, API versioning)
 │
 └── docs/                        # Design documents
     ├── ARCHITECTURE.md          # Technical architecture (definitive)
@@ -148,6 +161,28 @@ docker-compose up -d
 # Run database migrations
 docker-compose exec api alembic upgrade head
 ```
+
+### End-to-End Environment
+
+For a complete development environment with SMB server, sample documents, and the Strata agent:
+
+```bash
+# Start everything including agent and sample documents
+docker-compose -f docker-compose.yml -f docker-compose.e2e.yml up --build
+
+# The init container will automatically:
+# 1. Wait for the API to be ready
+# 2. Create a dev tenant with API key
+# 3. Create an estate and share
+# 4. Pass the API key to the agent
+
+# The agent will then scan the sample documents in dev/samples/
+```
+
+Sample documents include:
+- **Contracts**: Master Service Agreement, NDA
+- **Policies**: Data Classification Policy, Acceptable Use Policy
+- **RFCs**: Kubernetes Migration, API Versioning Strategy
 
 ### 2. Create a Tenant
 

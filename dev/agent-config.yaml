@@ -1,0 +1,20 @@
+# Strata Agent Configuration for Docker Development Environment
+# API key is set via STRATA_API_KEY environment variable
+
+agent_id: dev-agent-1
+api_base_url: http://api:8000
+scan_interval_seconds: 30  # Shorter interval for dev
+
+shares:
+  - name: documents
+    smb_uri: "\\\\samba\\documents"
+    mount_point: /mnt/documents
+    include_paths:
+      - /
+    exclude_patterns:
+      - "*.tmp"
+      - "~*"
+      - ".DS_Store"
+      - "Thumbs.db"
+      - "*.swp"
+    max_file_size_bytes: 104857600  # 100MB

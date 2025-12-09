@@ -1,0 +1,198 @@
+ACME CORPORATION
+ACCEPTABLE USE POLICY
+
+Policy Name: Acceptable Use Policy
+Policy Number: SEC-002
+Policy Type: Information Security
+Version: 3.0
+Effective Date: March 1, 2024
+Next Review Date: March 1, 2025
+Policy Owner: Chief Information Officer (CIO)
+Approved By: Executive Leadership Team
+
+1. PURPOSE
+
+This Acceptable Use Policy ("Policy") defines the acceptable use of information technology resources at ACME Corporation. This policy protects employees, partners, and the company from illegal or damaging actions.
+
+2. SCOPE
+
+This policy applies to:
+- All employees, contractors, consultants, and temporary workers
+- All equipment owned or leased by ACME Corporation
+- All network resources and internet access provided by ACME
+- Personal devices used for company business (BYOD)
+
+3. GENERAL USE AND OWNERSHIP
+
+3.1 Company Resources
+- IT resources are provided for business purposes
+- Limited personal use is permitted if it does not interfere with work
+- Users have no expectation of privacy when using company resources
+- All data created on company systems is company property
+
+3.2 User Responsibilities
+- Users are responsible for the security of their accounts
+- Passwords must not be shared or written down
+- Workstations must be locked when unattended
+- Suspicious activity must be reported immediately
+
+4. PROHIBITED ACTIVITIES
+
+The following activities are strictly prohibited:
+
+4.1 Security Violations
+- Unauthorized access to systems or data
+- Circumventing security controls
+- Installing unauthorized software
+- Connecting unauthorized devices to the network
+- Sharing credentials or access tokens
+- Port scanning or network reconnaissance without authorization
+
+4.2 Illegal Activities
+- Violating copyright, trade secret, or patent laws
+- Unauthorized copying of licensed software
+- Exporting controlled data in violation of export laws
+- Any activity that violates local, state, or federal law
+
+4.3 Communication Violations
+- Sending harassing, threatening, or offensive messages
+- Distributing spam or chain letters
+- Impersonating others
+- Unauthorized mass mailings
+
+4.4 Data Handling Violations
+- Unauthorized disclosure of confidential information
+- Storing sensitive data on unapproved systems
+- Transmitting unencrypted sensitive data
+- Uploading company data to unauthorized cloud services
+
+4.5 System Misuse
+- Using excessive bandwidth for non-business purposes
+- Running cryptocurrency mining software
+- Using company resources for personal business ventures
+- Intentionally introducing malware
+
+5. EMAIL AND COMMUNICATION
+
+5.1 Email Usage
+- Business email should be used for business purposes
+- Sensitive information must be encrypted
+- Auto-forwarding to external addresses is prohibited
+- Users must verify recipient addresses before sending sensitive data
+
+5.2 Messaging and Collaboration
+- Approved platforms: Slack, Microsoft Teams, Zoom
+- Confidential discussions should use private channels
+- Meeting recordings require participant consent
+
+6. INTERNET AND WEB USAGE
+
+6.1 Acceptable Use
+- Research related to job functions
+- Professional development
+- Limited personal browsing during breaks
+
+6.2 Prohibited Sites
+- Adult or explicit content
+- Gambling sites
+- Illegal download or streaming sites
+- Hacking or exploit sites
+- Sites promoting violence or hate
+
+6.3 Downloads
+- Only download files necessary for business
+- Verify source legitimacy before downloading
+- Report suspicious downloads to IT Security
+
+7. MOBILE AND REMOTE ACCESS
+
+7.1 Mobile Devices
+- Company mobile devices must have MDM software installed
+- Personal devices used for work must meet security requirements
+- Lost or stolen devices must be reported within 1 hour
+
+7.2 Remote Work
+- Use VPN for all remote access to company resources
+- Work only from secure, private locations
+- Do not use public Wi-Fi without VPN
+- Ensure home networks are secured with WPA3
+
+8. SOCIAL MEDIA
+
+8.1 Personal Use
+- Do not disclose confidential company information
+- Do not speak on behalf of the company without authorization
+- Clearly state opinions are personal, not company views
+
+8.2 Official Accounts
+- Only authorized personnel may manage company accounts
+- All posts must be approved by Marketing/Communications
+- Customer complaints must be escalated, not addressed directly
+
+9. MONITORING AND PRIVACY
+
+9.1 Company Rights
+- ACME reserves the right to monitor all IT resource usage
+- This includes email, web browsing, file access, and network traffic
+- Monitoring may occur without notice
+
+9.2 User Acknowledgment
+- By using company resources, users consent to monitoring
+- Users should have no expectation of privacy on company systems
+
+10. INCIDENT REPORTING
+
+10.1 Users must report:
+- Security incidents or suspicious activity
+- Lost or stolen devices
+- Suspected policy violations
+- Phishing attempts
+
+10.2 Report to:
+- IT Help Desk: helpdesk@acme-corp.example.com
+- Security Team: security@acme-corp.example.com
+- Anonymous Hotline: (555) 123-TIPS
+
+11. ENFORCEMENT
+
+11.1 Violations of this policy may result in:
+- Verbal or written warning
+- Suspension of access privileges
+- Termination of employment
+- Civil or criminal prosecution
+
+11.2 Severity of consequences depends on:
+- Nature and severity of the violation
+- Whether the violation was intentional
+- Prior violations
+- Impact on the company
+
+12. EXCEPTIONS
+
+Exceptions must be:
+- Requested in writing
+- Approved by IT Security and department manager
+- Documented and time-limited
+- Reviewed upon expiration
+
+13. TRAINING
+
+All users must complete:
+- Security awareness training upon hire
+- Annual refresher training
+- Additional training as required by role
+
+14. POLICY REVIEW
+
+This policy will be reviewed annually and updated as needed.
+
+15. RELATED DOCUMENTS
+
+- Data Classification Policy (SEC-001)
+- Password Policy (SEC-007)
+- Remote Work Policy (HR-015)
+- BYOD Policy (IT-003)
+
+---
+Document Classification: INTERNAL
+Last Updated: March 1, 2024
