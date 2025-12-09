@@ -85,6 +85,7 @@ strata/
 ├── .gitignore                   # Git ignore patterns
 ├── .pre-commit-config.yaml      # Pre-commit hooks config
 ├── pyproject.toml               # Root config for ruff, mypy, etc.
+├── Makefile                     # Development commands (run, test, check, nuke)
 ├── docker-compose.yml           # Docker services (db, api, worker, agent, samba)
 │
 ├── strata/                      # Control plane (FastAPI)
@@ -157,6 +158,9 @@ strata/
 
 ```bash
 # Start everything (db, api, worker, samba, agent)
+make run
+
+# Or manually:
 docker-compose up --build
 
 # The init container automatically:
@@ -166,6 +170,20 @@ docker-compose up --build
 # 4. Passes the API key to the agent
 #
 # The agent then scans the sample documents in docker/samples/
+```
+
+### Makefile Commands
+
+```bash
+make run       # Start all services
+make stop      # Stop all services
+make nuke      # Remove containers, volumes, and images
+make test      # Run tests
+make check     # Run code quality checks (ruff, vulture, bandit)
+make fmt       # Format code with ruff
+make typecheck # Run mypy type checking
+make migrate   # Run database migrations
+make logs      # Tail api and worker logs
 ```
 
 Sample documents include:
@@ -239,30 +257,28 @@ Exposure levels: LOW (0-39), MEDIUM (40-69), HIGH (70-100)
 
 ### Code Quality
 
-Pre-commit hooks are configured for code quality checks:
+```bash
+make check      # Run all checks (ruff, vulture, bandit)
+make fmt        # Format code with ruff
+make typecheck  # Run mypy type checking
+```
+
+Pre-commit hooks run automatically on commit. First-time setup:
 
 ```bash
-# Install pre-commit hooks (first time setup)
 uvx pre-commit install
-
-# Run all checks manually
-uvx pre-commit run --all-files
-
-# Run specific check
-uvx pre-commit run ruff --all-files
 ```
 
 Configured checks:
 - **ruff**: Linting and formatting (replaces black, isort, flake8)
-- **mypy**: Type checking (manual stage - run with `uvx pre-commit run mypy --all-files`)
+- **mypy**: Type checking (manual stage)
 - **vulture**: Dead code detection
 - **bandit**: Security vulnerability scanning
-- General checks: trailing whitespace, YAML/TOML validation, large files, merge conflicts
 
 ### Running Tests
 
 ```bash
-docker-compose exec api pytest
+make test       # Run all tests
 docker-compose exec api pytest -v tests/test_sensitivity.py  # Single file
 ```
 

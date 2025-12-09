@@ -16,47 +16,45 @@ Key capabilities:
 
 ## Build & Run Commands
 
-### Using Docker Compose (recommended)
+### Quick Start (Makefile)
 ```bash
-# Start all services (db, api, worker)
-docker-compose up -d
-
-# Run database migrations
-docker-compose exec api alembic upgrade head
-
-# View logs
-docker-compose logs -f api worker
+make run       # Start all services
+make test      # Run tests
+make check     # Run code quality checks
+make logs      # Tail logs
+make stop      # Stop services
+make nuke      # Remove everything (containers, volumes, images)
 ```
 
-### Agent Setup
+### Manual Docker Commands
+```bash
+docker-compose up -d --build      # Start all services
+docker-compose exec api alembic upgrade head  # Run migrations
+docker-compose logs -f api worker  # View logs
+```
+
+### Agent Setup (standalone)
 ```bash
 cd strata_agent
 cp config.example.yaml config.yaml
 # Edit config.yaml with your shares and API key
 
 uv sync
-
-# Run single scan
-uv run strata-agent --config config.yaml --once
-
-# Run continuously
-uv run strata-agent --config config.yaml
+uv run strata-agent --config config.yaml --once  # Single scan
+uv run strata-agent --config config.yaml         # Continuous
 ```
 
 ### Testing
 ```bash
-docker-compose exec api pytest
+make test                                         # Run all tests
 docker-compose exec api pytest -v tests/test_extraction.py  # Single file
 ```
 
 ### Code Quality
 ```bash
-# Pre-commit hooks run automatically on commit
-# To run manually:
-uvx pre-commit run --all-files
-
-# Run type checking (manual stage)
-uvx pre-commit run mypy --all-files
+make check      # Run all checks (ruff, vulture, bandit)
+make fmt        # Format code
+make typecheck  # Run mypy
 ```
 
 ## Architecture
