@@ -190,7 +190,7 @@ cd agent
 cp config.example.yaml config.yaml
 # Edit config.yaml with your API key and share mount points
 
-pip install -e .
+uv pip install -e .
 strata-agent --config config.yaml --once
 ```
 
@@ -277,7 +277,7 @@ Exposure levels: LOW (0-39), MEDIUM (40-69), HIGH (70-100)
 ```bash
 # Backend
 cd backend
-pip install -e ".[dev]"
+uv pip install -e ".[dev]"
 cp .env.example .env
 
 # Start local Postgres

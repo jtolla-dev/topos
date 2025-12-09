@@ -33,7 +33,7 @@ docker-compose logs -f api worker
 ```bash
 # Backend setup
 cd backend
-pip install -e ".[dev]"
+uv pip install -e ".[dev]"
 cp .env.example .env
 
 # Start Postgres with pgvector (requires Docker)
@@ -54,7 +54,7 @@ python -m app.workers.runner
 ### Agent Setup
 ```bash
 cd agent
-pip install -e .
+uv pip install -e .
 cp config.example.yaml config.yaml
 # Edit config.yaml with your shares and API key
 
