@@ -272,35 +272,11 @@ Exposure levels: LOW (0-39), MEDIUM (40-69), HIGH (70-100)
 
 ## Development
 
-### Local Setup
-
-```bash
-# Backend
-cd backend
-uv pip install -e ".[dev]"
-cp .env.example .env
-
-# Start local Postgres
-docker run -d --name strata-db -p 5432:5432 \
-  -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=strata \
-  pgvector/pgvector:pg16
-
-# Migrations
-alembic upgrade head
-
-# Run API
-uvicorn app.main:app --reload
-
-# Run workers (separate terminal)
-python -m app.workers.runner
-```
-
 ### Running Tests
 
 ```bash
-cd backend
-pytest
-pytest -v tests/test_sensitivity.py  # Single file
+docker-compose exec api pytest
+docker-compose exec api pytest -v tests/test_sensitivity.py  # Single file
 ```
 
 ### Environment Variables

@@ -28,29 +28,6 @@ docker-compose exec api alembic upgrade head
 docker-compose logs -f api worker
 ```
 
-### Local Development
-
-```bash
-# Backend setup
-cd backend
-uv pip install -e ".[dev]"
-cp .env.example .env
-
-# Start Postgres with pgvector (requires Docker)
-docker run -d --name strata-db -p 5432:5432 \
-  -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=strata \
-  pgvector/pgvector:pg16
-
-# Run migrations
-alembic upgrade head
-
-# Start API server
-uvicorn app.main:app --reload
-
-# Start workers (separate terminal)
-python -m app.workers.runner
-```
-
 ### Agent Setup
 ```bash
 cd agent
@@ -67,9 +44,8 @@ strata-agent --config config.yaml
 
 ### Testing
 ```bash
-cd backend
-pytest
-pytest tests/test_extraction.py -v  # Run single test file
+docker-compose exec api pytest
+docker-compose exec api pytest -v tests/test_extraction.py  # Single file
 ```
 
 ## Architecture
