@@ -1,6 +1,7 @@
 import logging
 import re
 from pathlib import Path
+from typing import TypedDict
 
 from pydantic import BaseModel
 
@@ -273,9 +274,9 @@ class Section:
 
     def get_path(self) -> list[str]:
         """Get hierarchical path from root to this section."""
-        path = []
-        current = self
-        while current:
+        path: list[str] = []
+        current: Section | None = self
+        while current is not None:
             label = current.number or current.heading
             if label:
                 path.insert(0, label.strip())
@@ -283,13 +284,21 @@ class Section:
         return path
 
 
-def detect_sections(text: str, patterns: list[re.Pattern]) -> list[Section]:
+class _SectionMatch(TypedDict):
+    heading: str
+    number: str | None
+    level: int
+    start: int
+    end: int
+
+
+def detect_sections(text: str, patterns: list[re.Pattern[str]]) -> list[Section]:
     """
     Detect section boundaries in text using the provided patterns.
 
     Returns a list of Section objects with detected boundaries.
     """
-    matches = []
+    matches: list[_SectionMatch] = []
 
     for pattern in patterns:
         for match in pattern.finditer(text):
@@ -297,34 +306,37 @@ def detect_sections(text: str, patterns: list[re.Pattern]) -> list[Section]:
             if len(groups) >= 2:
                 # Pattern has number/marker and title
                 marker, title = groups[0], groups[1]
-                heading = title.strip()
-                number = marker.strip()
+                heading = title.strip() if title else ""
+                number: str | None = marker.strip() if marker else None
                 # Determine level from marker
-                if marker.startswith("#"):
+                if marker and marker.startswith("#"):
                     level = len(marker)
-                elif "." in marker:
+                elif marker and "." in marker:
                     level = marker.count(".") + 1
                 else:
                     level = 1
-            else:
+            elif len(groups) == 1:
                 # Pattern has only heading (like ALL CAPS)
-                heading = groups[0].strip()
+                heading = groups[0].strip() if groups[0] else ""
                 number = None
                 level = 1
+            else:
+                # No groups captured, skip this match
+                continue
 
             matches.append(
-                {
-                    "heading": heading,
-                    "number": number,
-                    "level": level,
-                    "start": match.start(),
-                    "end": match.end(),
-                }
+                _SectionMatch(
+                    heading=heading,
+                    number=number,
+                    level=level,
+                    start=match.start(),
+                    end=match.end(),
+                )
             )
 
     # Sort by position and remove duplicates/overlaps
     matches.sort(key=lambda m: m["start"])
-    filtered = []
+    filtered: list[_SectionMatch] = []
     last_end = -1
     for m in matches:
         if m["start"] >= last_end:
@@ -332,7 +344,7 @@ def detect_sections(text: str, patterns: list[re.Pattern]) -> list[Section]:
             last_end = m["end"]
 
     # Create Section objects with end positions
-    sections = []
+    sections: list[Section] = []
     for i, m in enumerate(filtered):
         next_start = filtered[i + 1]["start"] if i + 1 < len(filtered) else len(text)
         section = Section(

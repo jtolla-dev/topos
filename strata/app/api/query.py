@@ -395,7 +395,7 @@ async def search_chunks_v0(
         agent_id=request.agent_id,
         user_id=request.user_id,
     ) as tracker:
-        results = []
+        results: list[ChunkSearchResult] = []
         for rank, (chunk, doc, file) in enumerate(rows):
             if len(results) >= request.k:
                 break
@@ -638,8 +638,8 @@ async def answer_with_evidence(
         agent_id=request.agent_id,
         user_id=request.user_id,
     ) as tracker:
-        evidence = []
-        context_texts = []
+        evidence: list[EvidenceChunk] = []
+        context_texts: list[str] = []
 
         for rank, (chunk, doc, file) in enumerate(rows):
             if len(evidence) >= request.k:

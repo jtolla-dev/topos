@@ -56,9 +56,9 @@ def classify_document_heuristic(text: str, title: str = "") -> DocType:
     """
     full_text = f"{title}\n{text[:5000]}".lower()  # Use title + first 5000 chars
 
-    contract_score = _count_pattern_matches(full_text, CONTRACT_PATTERNS)
-    policy_score = _count_pattern_matches(full_text, POLICY_PATTERNS)
-    rfc_score = _count_pattern_matches(full_text, RFC_PATTERNS)
+    contract_score = float(_count_pattern_matches(full_text, CONTRACT_PATTERNS))
+    policy_score = float(_count_pattern_matches(full_text, POLICY_PATTERNS))
+    rfc_score = float(_count_pattern_matches(full_text, RFC_PATTERNS))
 
     # Normalize scores (contracts tend to have more legal language)
     contract_score *= 1.0

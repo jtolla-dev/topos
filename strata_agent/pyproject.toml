@@ -14,11 +14,10 @@ dependencies = [
 dev = [
     "pytest>=7.4.0",
     "ruff>=0.8.0",
-    "mypy>=1.13.0",
+    "pyright>=1.1.390",
     "pre-commit>=4.0.0",
     "vulture>=2.13",
     "bandit[toml]>=1.7.0",
-    "types-PyYAML",
 ]
 
 [project.scripts]

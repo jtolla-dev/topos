@@ -45,9 +45,9 @@ fmt:
 	uvx ruff format .
 	uvx ruff check --fix .
 
-# Run type checking (not in default pre-commit)
+# Run type checking
 typecheck:
-	uvx pre-commit run mypy --all-files
+	uvx pyright strata/ strata_agent/
 
 # Run database migrations
 migrate:

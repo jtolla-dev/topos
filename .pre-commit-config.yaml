@@ -24,23 +24,17 @@ repos:
       # Formatter
       - id: ruff-format
 
-  # Type checking with mypy (set to warn-only for gradual adoption)
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.13.0
+  # Type checking with pyright
+  - repo: local
     hooks:
-      - id: mypy
-        additional_dependencies:
-          - fastapi>=0.104.0
-          - sqlalchemy>=2.0.0
-          - pydantic>=2.5.0
-          - pydantic-settings>=2.1.0
-          - httpx>=0.25.0
-          - types-PyYAML
-        args: [--config-file=pyproject.toml]
+      - id: pyright
+        name: pyright
+        entry: uvx pyright
+        language: system
+        types: [python]
         exclude: ^(strata/alembic/|docker/)
-        verbose: true
-        # TODO: Remove this when type errors are fixed
-        stages: [manual]
+        pass_filenames: false
+        args: [strata/, strata_agent/]
 
   # Dead code detection with vulture
   - repo: https://github.com/jendrikseipp/vulture

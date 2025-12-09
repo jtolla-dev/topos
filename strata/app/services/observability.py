@@ -182,12 +182,12 @@ async def get_interaction_trace(
         return None
 
     # Load chunk records
-    result = await session.execute(
+    chunk_result = await session.execute(
         select(InteractionChunk)
         .where(InteractionChunk.interaction_id == interaction_id)
         .order_by(InteractionChunk.rank)
     )
-    chunk_records = result.scalars().all()
+    chunk_records: list[InteractionChunk] = list(chunk_result.scalars().all())
 
     chunks_retrieved = [
         RetrievedChunk(
