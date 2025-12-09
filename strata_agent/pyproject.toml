@@ -17,7 +17,7 @@ dev = [
 ]
 
 [project.scripts]
-strata-agent = "agent.main:main"
+strata-agent = "strata_agent.main:main"
 
 [build-system]
 requires = ["hatchling"]

@@ -19,7 +19,7 @@ services:
 
   api:
     build:
-      context: ./backend
+      context: ./strata
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
@@ -41,7 +41,7 @@ services:
 
   worker:
     build:
-      context: ./backend
+      context: ./strata
       dockerfile: Dockerfile
     command: python -m app.workers.runner
     environment:
@@ -80,7 +80,7 @@ services:
   # Strata agent for scanning documents
   agent:
     build:
-      context: ./agent
+      context: ./strata_agent
       dockerfile: Dockerfile
     environment:
       STRATA_API_BASE_URL: http://api:8000

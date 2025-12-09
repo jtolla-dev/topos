@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 
-from agent.config import ShareConfig
+from strata_agent.config import ShareConfig
 
 logger = logging.getLogger(__name__)
 

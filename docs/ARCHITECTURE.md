@@ -96,7 +96,7 @@ Strata is a storage-native semantic layer that sits beside existing file infrast
 
 ### 3.1 On-Prem SMB Connector Agent
 
-**Location:** `agent/`
+**Location:** `strata_agent/`
 
 The agent runs in the customer environment and:
 - Mounts SMB shares read-only
@@ -122,7 +122,7 @@ shares:
 
 ### 3.2 FastAPI Server
 
-**Location:** `backend/app/`
+**Location:** `strata/app/`
 
 The control plane API server with these routers:
 
@@ -134,7 +134,7 @@ The control plane API server with these routers:
 
 ### 3.3 Workers
 
-**Location:** `backend/app/workers/`
+**Location:** `strata/app/workers/`
 
 Workers poll the job queue using `SELECT ... FOR UPDATE SKIP LOCKED`:
 
@@ -146,7 +146,7 @@ Workers poll the job queue using `SELECT ... FOR UPDATE SKIP LOCKED`:
 
 ### 3.4 Services
 
-**Location:** `backend/app/services/`
+**Location:** `strata/app/services/`
 
 | Service | Purpose |
 |---------|---------|

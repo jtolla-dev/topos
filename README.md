@@ -84,7 +84,7 @@ strata/
 ├── CLAUDE.md                    # Claude Code guidance
 ├── docker-compose.yml           # Docker services (db, api, worker, agent, samba)
 │
-├── backend/                     # Control plane (FastAPI)
+├── strata/                      # Control plane (FastAPI)
 │   ├── pyproject.toml           # Python dependencies
 │   ├── Dockerfile               # Container image
 │   ├── alembic.ini              # Migration config
@@ -120,11 +120,11 @@ strata/
 │           ├── semantics.py     # EXTRACT_SEMANTICS job processor
 │           └── runner.py        # Worker process entrypoint
 │
-├── agent/                       # SMB connector agent
+├── strata_agent/                # SMB connector agent
 │   ├── pyproject.toml           # Python dependencies
 │   ├── Dockerfile               # Agent container image
 │   ├── config.example.yaml      # Example configuration
-│   └── agent/
+│   └── strata_agent/
 │       ├── config.py            # YAML config loading
 │       ├── scanner.py           # File system scanner
 │       ├── client.py            # Strata API client

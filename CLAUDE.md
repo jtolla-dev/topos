@@ -30,7 +30,7 @@ docker-compose logs -f api worker
 
 ### Agent Setup
 ```bash
-cd agent
+cd strata_agent
 cp config.example.yaml config.yaml
 # Edit config.yaml with your shares and API key
 
@@ -53,39 +53,39 @@ docker-compose exec api pytest -v tests/test_extraction.py  # Single file
 
 The system consists of five main components:
 
-1. **On-Prem SMB Connector Agent** (`agent/`) - Scans SMB shares, sends file events to API
-2. **Strata Control Plane** (`backend/app/`) - FastAPI server for ingestion, query, and RAG APIs
-3. **Worker Services** (`backend/app/workers/`) - Process extraction, enrichment, and semantic extraction jobs
+1. **On-Prem SMB Connector Agent** (`strata_agent/`) - Scans SMB shares, sends file events to API
+2. **Strata Control Plane** (`strata/app/`) - FastAPI server for ingestion, query, and RAG APIs
+3. **Worker Services** (`strata/app/workers/`) - Process extraction, enrichment, and semantic extraction jobs
 4. **Data Stores** - Postgres with pgvector extension
 5. **Web UI** (not yet implemented) - Dashboard for sensitive content discovery
 
 ## Key Files
 
 **API Layer:**
-- `backend/app/main.py` - FastAPI application entry point
-- `backend/app/models.py` - SQLAlchemy ORM models (Document, Chunk, Agent, Policy, Interaction, etc.)
-- `backend/app/api/admin.py` - Tenant/estate/share/agent management
-- `backend/app/api/ingest.py` - Ingestion endpoint for file events
-- `backend/app/api/query.py` - Query, RAG, and observability APIs
+- `strata/app/main.py` - FastAPI application entry point
+- `strata/app/models.py` - SQLAlchemy ORM models (Document, Chunk, Agent, Policy, Interaction, etc.)
+- `strata/app/api/admin.py` - Tenant/estate/share/agent management
+- `strata/app/api/ingest.py` - Ingestion endpoint for file events
+- `strata/app/api/query.py` - Query, RAG, and observability APIs
 
 **Services:**
-- `backend/app/services/extraction.py` - Text extraction + type-aware chunking
-- `backend/app/services/classification.py` - Document type classification (CONTRACT/POLICY/RFC/OTHER)
-- `backend/app/services/semantic_extraction.py` - Structured field extraction via LLM
-- `backend/app/services/semantic_diff.py` - Compute diff between document versions
-- `backend/app/services/policy_engine.py` - Agent policy evaluation and LLM-safe views
-- `backend/app/services/observability.py` - RAG interaction tracking
-- `backend/app/services/sensitivity.py` - Regex-based PII/secret detection
-- `backend/app/services/exposure.py` - Exposure score calculation
+- `strata/app/services/extraction.py` - Text extraction + type-aware chunking
+- `strata/app/services/classification.py` - Document type classification (CONTRACT/POLICY/RFC/OTHER)
+- `strata/app/services/semantic_extraction.py` - Structured field extraction via LLM
+- `strata/app/services/semantic_diff.py` - Compute diff between document versions
+- `strata/app/services/policy_engine.py` - Agent policy evaluation and LLM-safe views
+- `strata/app/services/observability.py` - RAG interaction tracking
+- `strata/app/services/sensitivity.py` - Regex-based PII/secret detection
+- `strata/app/services/exposure.py` - Exposure score calculation
 
 **Workers:**
-- `backend/app/workers/extraction.py` - EXTRACT_CONTENT job processor (includes classification)
-- `backend/app/workers/enrichment.py` - ENRICH_CHUNKS job processor
-- `backend/app/workers/semantics.py` - EXTRACT_SEMANTICS job processor
-- `backend/app/workers/runner.py` - Worker process entrypoint
+- `strata/app/workers/extraction.py` - EXTRACT_CONTENT job processor (includes classification)
+- `strata/app/workers/enrichment.py` - ENRICH_CHUNKS job processor
+- `strata/app/workers/semantics.py` - EXTRACT_SEMANTICS job processor
+- `strata/app/workers/runner.py` - Worker process entrypoint
 
 **Agent:**
-- `agent/agent/scanner.py` - File system scanner
+- `strata_agent/strata_agent/scanner.py` - File system scanner
 
 ## Key Technical Decisions
 

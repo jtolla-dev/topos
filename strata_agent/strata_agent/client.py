@@ -3,8 +3,8 @@ from datetime import datetime
 
 import httpx
 
-from agent.config import AgentSettings
-from agent.scanner import FileInfo
+from strata_agent.config import AgentSettings
+from strata_agent.scanner import FileInfo
 
 logger = logging.getLogger(__name__)
 

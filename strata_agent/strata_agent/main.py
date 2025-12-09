@@ -5,9 +5,9 @@ import signal
 import sys
 from pathlib import Path
 
-from agent.client import StrataClient
-from agent.config import AgentSettings
-from agent.scanner import scan_share
+from strata_agent.client import StrataClient
+from strata_agent.config import AgentSettings
+from strata_agent.scanner import scan_share
 
 logging.basicConfig(
     level=logging.INFO,

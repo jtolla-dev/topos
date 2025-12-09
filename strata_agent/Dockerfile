@@ -12,7 +12,7 @@ ENV PATH="/root/.local/bin:$PATH"
 
 # Copy project files
 COPY pyproject.toml .
-COPY agent/ agent/
+COPY strata_agent/ strata_agent/
 
 # Install dependencies
 RUN uv pip install --system --no-cache .
