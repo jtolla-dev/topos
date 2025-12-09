@@ -120,7 +120,7 @@ class InteractionTracker:
         self._start_time = time.perf_counter()
         return self
 
-    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
+    async def __aexit__(self, _exc_type, _exc_val, _exc_tb) -> None:
         # Calculate latency
         latency_ms = None
         if self._start_time:

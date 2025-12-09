@@ -85,7 +85,7 @@ async def run_continuous(settings: AgentSettings) -> None:
     agent = Agent(settings)
 
     # Handle shutdown signals
-    def handle_shutdown(sig, frame):  # noqa: ARG001
+    def handle_shutdown(sig, _frame):
         logger.info(f"Received signal {sig}")
         agent.stop()
 

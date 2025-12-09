@@ -20,7 +20,7 @@ async def run_workers():
     semantics_worker = SemanticExtractionWorker()
 
     # Handle shutdown signals
-    def handle_shutdown(sig, frame):  # noqa: ARG001
+    def handle_shutdown(sig, _frame):
         logger.info(f"Received shutdown signal: {sig}")
         extraction_worker.stop()
         enrichment_worker.stop()

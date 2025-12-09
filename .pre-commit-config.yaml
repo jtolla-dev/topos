@@ -47,7 +47,7 @@ repos:
     rev: v2.13
     hooks:
       - id: vulture
-        args: [strata/, strata_agent/, vulture_whitelist.py, --min-confidence=90, --exclude=alembic]
+        args: [strata/, strata_agent/, --min-confidence=90, --exclude=alembic]
 
   # Security checks with bandit
   - repo: https://github.com/PyCQA/bandit
