@@ -1,28 +1,7 @@
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Topos icon">
-  <!-- Icon only: topology T -->
-  <g transform="translate(5,10)">
-    <!-- Top bar -->
-    <path
-      d="M22 60 H168"
-      stroke="currentColor"
-      stroke-width="22"
-      stroke-linecap="round"
-    />
-
-    <!-- Stem (centered) -->
-    <path
-      d="M95 72 V180"
-      stroke="currentColor"
-      stroke-width="22"
-      stroke-linecap="round"
-    />
-
-    <!-- Nodes -->
-    <circle cx="22" cy="60" r="14" fill="currentColor"/>
-    <circle cx="168" cy="60" r="14" fill="currentColor"/>
-    <circle cx="95" cy="180" r="14" fill="currentColor"/>
-
-    <!-- Outer ring on bottom node -->
-    <circle cx="95" cy="180" r="28" stroke="currentColor" stroke-width="7" fill="none" opacity="0.95"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0B1220"/>
+  <rect x="10" y="10" width="44" height="44" rx="16" fill="none" stroke="#E5E7EB" stroke-width="5"/>
+  <rect x="18" y="18" width="28" height="28" rx="12" fill="none" stroke="#E5E7EB" stroke-width="5"/>
+  <rect x="26" y="26" width="12" height="12" rx="6" fill="none" stroke="#E5E7EB" stroke-width="5"/>
+  <circle cx="46" cy="20" r="4" fill="#8B5CF6"/>
 </svg>
